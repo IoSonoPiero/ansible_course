@@ -3,21 +3,10 @@
   become: true
   tasks:
 
-  - name: install apache2 package (Debian/Ubuntu)
-    ansible.builtin.apt:
+  - name: install apache2 package
+    ansible.builtin.package:
       name:
         - "{{ apache2_package }}"
         - "{{ php_package }}"
       state: latest
       update_cache: yes
-    when: ansible_os_family == "Debian"
-
-  - name: install apache2 package (Red Hat/Fedora)
-    ansible.builtin.dnf:
-      name:
-        - "{{ apache2_package }}"
-        - "{{ php_package }}"
-      state: latest
-      update_cache: yes
-      use_backend: dnf4
-    when: ansible_os_family == "RedHat"
